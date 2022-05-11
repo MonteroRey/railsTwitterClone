@@ -20,6 +20,11 @@ class UsersController < ApplicationController
           render "new", status: :unprocessable_entity
         end
     end
+    def show
+        @tweet = current_user.tweets.build if logged_in?
+        @tweets = @user.tweets.with_attached_image.paginate(page: params[:page])
+    end
+    
     private 
     def user_params
         params.require(:user).permit(:name, :email, :password, :password_confirmation, :slug)
