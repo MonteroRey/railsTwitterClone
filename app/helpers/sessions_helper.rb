@@ -16,13 +16,17 @@ module SessionsHelper
           end
         end
     end
+    def current_user?(user)
+      user && user == current_user
+    end
+    ################# remember me ##################
     def forget(user)
-      user.forget
+      user.forget          #define at the model
       cookies.delete(:user_id)
       cookies.delete(:remember_token)
     end
     def remember(user)
-      user.remember
+      user.remember        #define at the model
       cookies.permanent.encrypted[:user_id] = user.id
       cookies.permanent[:remember_token] = user.remember_token
     end
