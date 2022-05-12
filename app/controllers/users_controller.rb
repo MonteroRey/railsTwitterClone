@@ -3,9 +3,6 @@ class UsersController < ApplicationController
     def index 
         @users = User.all
     end
-    def show
-        #@tweet = current_user
-    end
     def new
         @user = User.new
     end
@@ -21,11 +18,16 @@ class UsersController < ApplicationController
         end
     end
     def show
-        @tweet = current_user.tweets.build if logged_in?
-        @tweets = @user.tweets.with_attached_image.paginate(page: params[:page])
+        @user = User.find(params[:id])
+        #@tweet = current_user.tweets.build if logged_in?
+        #@tweets = @user.tweets.with_attached_image.paginate(page: params[:page])
     end
     
     private 
+    def set_user
+        #@user = User.find(params[:id])
+        #@user = User.find_by!(slug: params[:id])
+    end
     def user_params
         params.require(:user).permit(:name, :email, :password, :password_confirmation, :slug)
     end
