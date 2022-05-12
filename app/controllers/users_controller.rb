@@ -3,9 +3,6 @@ class UsersController < ApplicationController
     def index 
         @users = User.all
     end
-    def show
-        #@tweet = current_user
-    end
     def new
         @user = User.new
     end
