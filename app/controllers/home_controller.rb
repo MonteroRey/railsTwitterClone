@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
-    #before_action :logged_in_user
-
+    #before_action :logged_in_user       # defined method in the session controller
+    
   def index
-    #@tweets = current_user.feed.includes(:user).with_attached_image.paginate(page: params[:page])
+    #@tweets = current_user.feed.includes(:user).with_attached_image.paginate(page: params[:page]) 
+    
   end
 end
