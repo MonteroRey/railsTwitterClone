@@ -14,8 +14,14 @@ class TweetsController < ApplicationController
           redirect_to root_url
         end
     end
+    ############################# delete tweet #####################
+    def destroy
+      @tweet.destroy
+      redirect_to root_url
+    end
     private
     def tweet_params
         params.require(:tweet).permit(:content, :image)
     end
+    
 end
