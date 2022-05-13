@@ -18,7 +18,7 @@
       </time>
       <% if current_user?(tweet.user) %>
         <div class="tweet-actions">
-          <%= link_to "delete", tweet, method: :delete, data: { confirm: "Delete Tweet?" } %>
+          <%= button_to "delete", tweet, method: :delete, data: { confirm: "Delete Tweet?" } %>
         </div>
       <% end %>
     </div>
