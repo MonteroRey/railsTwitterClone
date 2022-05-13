@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+    before_action :logged_in_user, only: [:edit, :update, :destroy]
+    
     def index 
         @users = User.all
     end
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
     def show
         @user  = User.find(params[:id])
         @tweet = current_user.tweets.build if logged_in?
-        #@tweets = @user.tweets.with_attached_image.paginate(page: params[:page])
+        @tweets = @user.tweets.with_attached_image.paginate(page: params[:page])
     end
     
     private 
