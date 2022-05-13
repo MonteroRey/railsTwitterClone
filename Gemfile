@@ -50,6 +50,7 @@ gem "bootsnap", require: false
 gem "webpacker"
 gem "will_paginate-bootstrap-style"
 gem "will_paginate"
+gem "inline_svg" 
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
