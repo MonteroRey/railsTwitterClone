@@ -5,7 +5,7 @@ class TweetsController < ApplicationController
     end
     def create
         @tweet = current_user.tweets.build(tweet_params)
-        #@tweet.image.attach(tweet_params[:image])
+        @tweet.image.attach(tweet_params[:image])
         if @tweet.save
           flash[:success] = "Tweet created!"
           redirect_to root_url
