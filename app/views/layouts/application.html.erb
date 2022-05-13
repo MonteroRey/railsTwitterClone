@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <title><%= full_title(yield(:title)) %></title> <!-- > full_title was defined in the application helper<!-->
     <%= stylesheet_pack_tag "application" %>
-    
+    <%= javascript_pack_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
