@@ -30,4 +30,11 @@ module SessionsHelper
       cookies.permanent.encrypted[:user_id] = user.id
       cookies.permanent[:remember_token] = user.remember_token
     end
+    ############################ log out ###################
+    def log_out
+      forget(current_user)
+      reset_session
+      @current_user = nil
+    end
+
 end
