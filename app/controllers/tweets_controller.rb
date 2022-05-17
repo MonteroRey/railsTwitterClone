@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  before_action :correct_user, only: [:destroy]
     def index
         @tweets = Tweet.includes(:user).with_attached_image.paginate(page: params[:page])
         render "home/index"
@@ -22,6 +23,10 @@ class TweetsController < ApplicationController
     private
     def tweet_params
         params.require(:tweet).permit(:content, :image)
+    end
+    def correct_user
+      @tweet = current_user.tweets.find_by(id: params[:id])
+      redirect_to root_url if @tweet.nil?
     end
     
 end

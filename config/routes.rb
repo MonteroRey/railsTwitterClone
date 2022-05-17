@@ -7,8 +7,17 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
   get "logout", to: "sessions#destroy"
   get    "signup", to: "users#new"  #to routes into users/new.html.erb
-  resources :users, only: [:index, :show, :edit, :create, :update, :destroy]
-  resources :tweets, only: [:index, :create, :destroy]
+  resources :users, only: [:index, :show, :edit, :create, :update, :destroy]do
+  member do
+    get :following
+    get :followers
+  end
+end
+  resources :tweets, only: [:index, :create ,:destroy]
+
+
+  resource  :relationship, only: [:create, :destroy]
+  
 
   get "help",  to: "static_pages#help"   ###to render in the footer in the layout 
   get "about", to: "static_pages#about"  ###to render in the footer in the layout 
