@@ -16,8 +16,8 @@ end
   resources :tweets, only: [:index, :create ,:destroy]
 
 
-  resource  :relationship, only: [:create, :destroy]
-  
+  resource  :relationship, only: [:create, :destroy]   #
+  resolve("Relationship") { :relationship } #resolve polymorphic mappings from join table Relationship model to URL
 
   get "help",  to: "static_pages#help"   ###to render in the footer in the layout 
   get "about", to: "static_pages#about"  ###to render in the footer in the layout 
