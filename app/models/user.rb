@@ -28,4 +28,11 @@ class User < ApplicationRecord
     def unfollow(other_user)
         following.delete(other_user)
     end
+
+
+    class << self
+        def new_token
+          SecureRandom.urlsafe_base64
+        end
+    end
 end
