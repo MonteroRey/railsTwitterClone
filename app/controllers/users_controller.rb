@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_action :require_login
+    before_action :set_user,       only: [ :edit, :update, :destroy]
     before_action :logged_in_user, only: [:edit, :update, :destroy]
     #before_action :correct_user,   only: [:edit, :update, :destroy]
     
@@ -24,23 +26,20 @@ class UsersController < ApplicationController
         @tweet = current_user.tweets.build if logged_in?
         @tweets = @user.tweets.with_attached_image.paginate(page: params[:page])
     end
-    ####################################### edit ##############################
+    ####################################### edit and save ##############################
     def edit
       @user = User.find(params[:id])
-      render :edit
+      
     end
 
-    # def update
-    #     @user = User.find(params[:id])
-    #     byebug
-    #     if @user.update(user_params)
-          
-    #       flash[:success] = "Profile was successfully updated."
-    #       redirect_to @user
-    #     else
-    #       render :edit
-    #     end
-    # end
+    def update   
+        if @user.update(user_params)        
+          flash[:success] = "Profile was successfully updated."
+          redirect_to @user
+        else
+          render :edit
+        end
+    end
     ############################################################################
     private 
     def user_params
@@ -66,6 +65,17 @@ class UsersController < ApplicationController
     #     end
     # end
 
-    #############################################################################
-    
+    ################################################################################################################
+    ##############################   set user using before_action for edit,update and destroy  #############################
+    def set_user
+      @user = User.find_by!(id: params[:id])
+    end
+
+    ########################
+    def require_login
+      unless logged_in?
+        flash[:error] = "You must be logged in to access this section"
+        redirect_to(root_path) # halts request cycle
+      end
+    end
 end
