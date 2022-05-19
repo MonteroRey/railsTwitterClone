@@ -1,0 +1,51 @@
+<% if logged_in? %>
+    <li class="nav-item">
+            <%= link_to users_path, class: 'nav-link', aria: { current: 'page' } do %>
+              <%= inline_svg_tag("bootstrap-icons/people.svg") %>
+              <span>Users</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to current_user, class: 'nav-link' do %>
+              <%= inline_svg_tag("bootstrap-icons/person.svg") %>
+              <span>Profile</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to tweets_path, class: 'nav-link' do %>
+              <%= inline_svg_tag("bootstrap-icons/chat-left.svg") %>
+              <span>Tweets</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to edit_user_path(current_user), class: 'nav-link' do %>
+              <%= inline_svg_tag("bootstrap-icons/gear.svg") %>
+              <span>Edit</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to logout_path, method: "delete", class: 'nav-link' do %>
+              <%= inline_svg_tag("bootstrap-icons/box-arrow-right.svg") %>
+              <span>Sign out</span>
+            <% end %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to users_path, class: 'nav-link' do %>
+              <%= inline_svg_tag("bootstrap-icons/people.svg") %>
+              <span>Users</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to tweets_path, class: 'nav-link' do %>
+              <%= inline_svg_tag("bootstrap-icons/chat-left.svg") %>
+              <span>Tweets</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to login_path, class: 'nav-link' do %>
+              <%# <%= inline_svg_tag("bootstrap-icons/box-arrow-in-right.svg") %> 
+              <span>Sign in</span>
+            <% end %>
+          </li>
+<% end %>
