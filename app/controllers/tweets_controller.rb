@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  before_action :require_login #### to restrict non-logged-in users
   before_action :correct_user, only: [:destroy]
     def index
         @tweets = Tweet.includes(:user).with_attached_image.paginate(page: params[:page])
@@ -27,6 +28,14 @@ class TweetsController < ApplicationController
     def correct_user
       @tweet = current_user.tweets.find_by(id: params[:id])
       redirect_to root_url if @tweet.nil?
+    end
+
+    #### to restrict non-logged-in users
+    def require_login
+      unless logged_in?
+        flash[:error] = "You must be logged in to access this section"
+        redirect_to(root_path) # halts request cycle
+      end
     end
     
 end
