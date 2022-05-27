@@ -21,6 +21,12 @@
       <%end%>
       <a>
     </div>
+    <%byebug%>
+    <div> 
+        <% current_user.tweets.each do |t|%>
+        <%= render "shared/comment", t: t%>
+        <%end%>
+    </div>
     <div class="tweet-footer">
       <time>
         <%= time_ago_in_words(tweet.created_at) %> ago.
