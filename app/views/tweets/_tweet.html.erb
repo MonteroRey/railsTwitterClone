@@ -21,11 +21,16 @@
       <%end%>
       <a>
     </div>
-    <%byebug%>
     <div> 
-        <% current_user.tweets.each do |t|%>
-        <%= render "shared/comment", t: t%>
-        <%end%>
+      <%byebug%> 
+        <%= form_for :comment, url: comments_path do |f| %>
+        <%= gravatar_for current_user, size: 32 %>
+        <%= f.text_area :content, placeholder: "Write a comment...", required: true %>
+        <div class="action">
+          <%= f.submit "Submit" %>
+        </div>
+<% end %>
+
     </div>
     <div class="tweet-footer">
       <time>
@@ -33,7 +38,7 @@
       </time>
       <% if current_user?(tweet.user) %>
         <div class="tweet-actions">
-          <%= link_to "delete", tweet, method: :delete, data: { confirm: "Delete Tweet?" } %>
+          <%= button_to "delete", tweet, method: :delete, data: { confirm: "Delete Tweet?" } %>
         </div>
       <% end %>
     </div>
