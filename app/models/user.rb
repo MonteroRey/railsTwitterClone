@@ -18,6 +18,11 @@ class User < ApplicationRecord
                                    inverse_of: :followed,
                                    dependent: :destroy
     has_many :followers, through: :passive_relationships, source: :follower
+    ######################### comment #####################
+    has_many :comments, dependent: :destroy
+
+
+
     ######################### remember block #############
     def remember
         self.remember_token = self.class.new_token

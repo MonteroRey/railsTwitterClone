@@ -30,5 +30,9 @@ end
       put 'liked', to: 'tweets#liked'
     end
   end
+  ######################## routes for comment ##############
+  resources :comments, only: [:new, :create, :destroy]
+  
+
 
 end
