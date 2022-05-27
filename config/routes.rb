@@ -23,12 +23,4 @@ end
   get "about", to: "static_pages#about"  ###to render in the footer in the layout 
   # Defines the root path route ("/")
   # root "articles#index"
-
-  resources :tweets do
-    member do
-      put 'like', to: 'tweets#like'    #put 'like', to: 'posts#upvote'
-      put 'liked', to: 'tweets#liked'
-    end
-  end
-
 end

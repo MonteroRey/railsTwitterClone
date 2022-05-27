@@ -11,32 +11,16 @@
           <%= image_tag tweet.display_image, class: 'img-fluid rounded' %>
         </div>
       <% end %>
-      <a>
-      <%if current_user.liked? tweet%>
-        <div><%= button_to liked_tweet_path(tweet), method: :put, remote: :true do%> liked </div>
-        <%end%>
-      <%elsif%>
-        <div><%= button_to like_tweet_path(tweet), method: :put do%> like </div>
-        <%end%>
-      <%end%>
-      <a>
     </div>
     <div class="tweet-footer">
       <time>
         <%= time_ago_in_words(tweet.created_at) %> ago.
-      </time>
+      </time> 
       <% if current_user?(tweet.user) %>
         <div class="tweet-actions">
-          <%= link_to "delete", tweet, method: :delete, data: { confirm: "Delete Tweet?" } %>
+          <%= button_to "delete", tweet_path(tweet), method: :delete, data: { confirm: "Delete Tweet?" } %>
         </div>
       <% end %>
     </div>
   </div>
 </li>
-
-
-
-
-
-
-    

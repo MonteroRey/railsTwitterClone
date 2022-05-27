@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    #before_action :require_login , except: :new
+    before_action :require_login
     before_action :set_user,       only: [ :edit, :update, :destroy]
     before_action :logged_in_user, only: [:edit, :update, :destroy]
     #before_action :correct_user,   only: [:edit, :update, :destroy]
@@ -41,26 +41,23 @@ class UsersController < ApplicationController
         end
     end
     ############################################################################
-    ###########################################################################
-    ######################  follower/following  ###############################
-    def following
-      @title = "Following"
-      @users = @user.following.paginate(page: params[:page])
-      render :show_follow
-    end
-
-    def followers
-      @title = "Followers"
-      @users = @user.followers.paginate(page: params[:page])
-      render :show_follow
-    end
-    
-
     private 
     def user_params
         params.require(:user).permit(:name, :email, :password, :password_confirmation, :slug)
     end
-    
+    ###########################################################################
+    ######################  follower/following  ###############################
+    def following
+        @title = "Following"
+        @users = @user.following.paginate(page: params[:page])
+        render :show_follow
+    end
+
+    def followers
+        @title = "Followers"
+        @users = @user.followers.paginate(page: params[:page])
+        render :show_follow
+    end
 
     # def correct_user
     #     unless current_user?(@user)
@@ -75,10 +72,10 @@ class UsersController < ApplicationController
     end
 
     ########################
-    # def require_login
-    #   unless logged_in?
-    #     flash[:error] = "You must be logged in to access this section"
-    #     redirect_to(root_path) # halts request cycle
-    #   end
-    # end
+    def require_login
+      unless logged_in?
+        flash[:error] = "You must be logged in to access this section"
+        redirect_to(root_path) # halts request cycle
+      end
+    end
 end
