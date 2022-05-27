@@ -1,6 +1,8 @@
 class User < ApplicationRecord
     #attr_accessible :email, :name, :password, :password_confirmation
     # attr_accessor :password, :password_confirmation
+    acts_as_voter         # model votable helper
+
     attr_accessor :remember_token
     has_secure_password
     has_many :tweets, dependent: :destroy
@@ -10,6 +12,12 @@ class User < ApplicationRecord
                                   inverse_of: :follower,
                                   dependent: :destroy
     has_many :following, through: :active_relationships,  source: :followed
+    #association for the followers
+    has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
+                                   inverse_of: :followed,
+                                   dependent: :destroy
+    has_many :followers, through: :passive_relationships, source: :follower
     ######################### remember block #############
     def remember
         self.remember_token = self.class.new_token
