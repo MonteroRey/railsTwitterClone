@@ -12,4 +12,11 @@ class CommentsController < ApplicationController
         end
         redirect_back(fallback_location: root_path)
     end
+
+
+    private
+
+    def comments_params
+      params.require(:comment).permit(:content, :tweet_id)
+    end
 end
