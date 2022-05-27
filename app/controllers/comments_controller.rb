@@ -4,6 +4,12 @@ class CommentsController < ApplicationController
     end
 
     def create 
-        byebug
+        @comment = current_user.comments.build(comments_params)
+        if @comment.save
+            flash[:success] = 'Comment saved!'
+        else
+            flash[:danger] = 'Something went wrong...'
+        end
+        redirect_back(fallback_location: root_path)
     end
 end
